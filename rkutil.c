@@ -418,7 +418,7 @@ static void updateSystemPreferencesFromControlFile(UserParams *user) {
         RKLog(">WavformCal count = %d\n", k);
     }
 
-    // Force raw data recorder
+    // Start raw data recorder
     user->desc.initFlags |= RKInitFlagStartRawDataRecorder;
 
     RKPreferenceFree(userPreferences);

@@ -486,8 +486,6 @@ RKReporter *RKReporterInitWithRadarAndHostPathway(RKRadar *radar, const char *ho
     engine->rayStride = 1;
     engine->memoryUsage = sizeof(RKReporter);
     if (host == NULL || strlen(host) == 0) {
-        // strcpy(engine->host, "http://localhost:8000");
-        // strcpy(engine->pathway, "radarkit");
         free(engine);
         return NULL;
     } else {
