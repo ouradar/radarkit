@@ -418,6 +418,9 @@ static void updateSystemPreferencesFromControlFile(UserParams *user) {
         RKLog(">WavformCal count = %d\n", k);
     }
 
+    // Force raw data recorder
+    user->desc.initFlags |= RKInitFlagStartRawDataRecorder;
+
     RKPreferenceFree(userPreferences);
 }
 
@@ -904,13 +907,18 @@ int main(int argc, const char **argv) {
     RKCommandCenterAddRadar(center, myRadar);
 
     // Make a reporter and have it call a RadarHub
-    RKReporter *reporter = RKReporterInitWithRadarAndHostPathway(myRadar, systemPreferences->radarHubHostPathway);
-    if (reporter == NULL) {
-        RKLog("Error. Unable to initiate reporter\n");
+    RKReporter *reporter;
+    if (strlen(systemPreferences->radarHubHostPathway) == 0) {
+        reporter = NULL;
     } else {
-        int v = MAX(systemPreferences->verbose, systemPreferences->engineVerbose['w']);
-        RKReporterSetVerbose(reporter, v);
-        RKReporterStart(reporter);
+        reporter = RKReporterInitWithRadarAndHostPathway(myRadar, systemPreferences->radarHubHostPathway);
+        if (reporter == NULL) {
+            RKLog("Error. Unable to initiate reporter\n");
+        } else {
+            int v = MAX(systemPreferences->verbose, systemPreferences->engineVerbose['w']);
+            RKReporterSetVerbose(reporter, v);
+            RKReporterStart(reporter);
+        }
     }
 
     // Now we use the framework.

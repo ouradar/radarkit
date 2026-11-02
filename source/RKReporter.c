@@ -486,8 +486,10 @@ RKReporter *RKReporterInitWithRadarAndHostPathway(RKRadar *radar, const char *ho
     engine->rayStride = 1;
     engine->memoryUsage = sizeof(RKReporter);
     if (host == NULL || strlen(host) == 0) {
-        strcpy(engine->host, "http://localhost:8000");
-        strcpy(engine->pathway, "radarkit");
+        // strcpy(engine->host, "http://localhost:8000");
+        // strcpy(engine->pathway, "radarkit");
+        free(engine);
+        return NULL;
     } else {
         char *c = strchr(host, ' ');
         if (c) {
@@ -502,7 +504,7 @@ RKReporter *RKReporterInitWithRadarAndHostPathway(RKRadar *radar, const char *ho
     }
     snprintf(engine->address, sizeof(engine->address), "/ws/radar/%s/", engine->pathway);
     if (radar->desc.initFlags & RKInitFlagVerbose) {
-        RKLog("%s Setting up '%s' (%s%s%s%s%s)\n",
+        RKLog("%s Setting up '%s' (%s%s%s%s)\n",
             engine->name, radar->desc.name,
             rkGlobalParameters.showColor ? RKMonokaiGreen : "",
             engine->host, engine->address,
