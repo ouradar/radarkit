@@ -650,3 +650,9 @@ def read_RKComplex_from_waveform(waveform, index=0):
     _from_mem = pythonapi.PyMemoryView_FromMemory
     _from_mem.restype = py_object
     return np.frombuffer(_from_mem(waveform.contents.samples[index], 8 * waveform.contents.depth), dtype=np.complex64)
+
+
+def read_RKInt16C_from_waveform(waveform, index=0):
+    _from_mem = pythonapi.PyMemoryView_FromMemory
+    _from_mem.restype = py_object
+    return np.frombuffer(_from_mem(waveform.contents.iSamples[index], 4 * waveform.contents.depth), dtype=np.int16)
