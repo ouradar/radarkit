@@ -2,7 +2,6 @@
 
 [![x][version-icon]][release-link]
 [![x][license-icon]][license-link]
-[![x][pipeline-icon]][pipeline-link]
 
 First of all, many thanks for your interest in the framework! :smile: :thumbsup: :punch:
 
@@ -20,7 +19,7 @@ Follow these steps to get the project
 1. Clone a git project using one of the following commands in Terminal:
 
    ```shell
-   git clone https://github.com/ouradar/radarkit.git
+   git clone https://github.com/ouradar/radarkit
    ```
 
 2. Get the required packages, which can either be installed through one of the package managers or compiled from source, which I would recommend for the FFTW library since it can take advantage of SSE, SSE2, AVX and AVX-2 accelerations (see 5).
@@ -520,6 +519,7 @@ void RKConcludeControls(RKRadar *);                                             
 | `RKPulseStatusReadyForMomentEngine`                      | `RKMomentEngine` waits for this                        |
 | `RKPulseStatusCompleteForMoments`                        | `RKMomentEngine` waits for this                        |
 | `RKPulseStatusUsedForMoments`                            | `RKMomentEngine` sets this                             |
+|                                                          | `RKRawDataRecorder` waits for this                     |
 | `RKPulseStatusRecorded`                                  | `RKSweepEngine` sets this                              |
 | `RKPulseStatusConsumed`                                  | `RKPulseEngine` sets this                              |
 |                                                          | `RKPulseEngine` may wait for this                      |

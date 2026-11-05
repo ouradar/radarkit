@@ -239,7 +239,7 @@ static void *pulseRecorder(void *in) {
                 i = RKPreviousModuloS(i, engine->radarDescription->pulseBufferDepth);
                 pulse = RKGetPulseFromBuffer(engine->pulseBuffer, i);
                 if (pulse->header.s != RKPulseStatusVacant) {
-                    if (!(pulse->header.s & RKPulseStatusRingInspected)) {
+                    if (!(pulse->header.s & RKPulseStatusInspected)) {
                         RKLog("%s Warning. Pulse has not been inspected.   i = %d   0x%x\n", engine->name, i, pulse->header.s);
                     }
                     pulse->header.s |= RKPulseStatusRecorded;
